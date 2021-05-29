@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class NetworkUtils {
 
+    /* API url with API Key to fetch weather forecast details */
     private static final String API_URL =
             "https://samples.openweathermap.org/data/2.5/forecast/hourly?q=London,us&appid=b6907d289e10d714a6e88b30761fae22";
 
@@ -24,7 +25,8 @@ public class NetworkUtils {
         }
     }
 
-    public static URL buildUrlFromString(String  urlString) {
+
+    private static URL buildUrlFromString(String  urlString) {
         try {
             URL url = new URL(urlString);
             return url;
@@ -34,12 +36,17 @@ public class NetworkUtils {
         }
     }
 
-    public static String getResponseFromHttpUrl(URL url) throws IOException {
+    private  static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
         InputStream in = urlConnection.getInputStream();
 
+        // InputStream can be read in many ways but one of the best ways i
+        // to use scanner.
         Scanner scanner = new Scanner(in);
+
+        // using \A delimiter forces scanner to read the entire the input in
+        // a single token
         scanner.useDelimiter("\\A");
 
         String response = null;
