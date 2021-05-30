@@ -17,10 +17,10 @@ public class NetworkUtils {
         try {
             URL url = buildUrlFromString(API_URL);
             String jsonResponse = getResponseFromHttpUrl(url);
-
             return jsonResponse;
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("An error occurred while establishing a connection to the API");
+            System.out.println("Check your internet connection and try again.");
             return null;
         }
     }
